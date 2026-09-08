@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI App Coder — Beschreibe deine App. Erhalte den Code.</title>
+<meta name="description" content="Der AI App Coder verwandelt deine Ideen sofort in lauffähige Web-Apps — 12 Vorlagen, Design-Wahl, KI-Modus, 100 % im Browser.">
+<meta name="theme-color" content="#6366f1">
+<link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32.png">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<style>
+  :root{
+    --bg:#0b0f1a; --panel:#111827; --border:#1f2a44;
+    --accent:#6366f1; --accent2:#22d3ee; --text:#e5e7eb; --muted:#94a3b8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+    background:var(--bg);color:var(--text);
+    background:radial-gradient(1200px 600px at 80% -10%,rgba(99,102,241,.25),transparent 60%),
+               radial-gradient(900px 500px at -10% 110%,rgba(34,211,238,.15),transparent 60%),
+               var(--bg);
+  }
+  nav{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:18px 40px;border-bottom:1px solid var(--border);
+    position:sticky;top:0;background:rgba(11,15,26,.8);backdrop-filter:blur(8px);z-index:20;
+  }
+  .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.15rem}
+  .logo .badge{background:linear-gradient(135deg,var(--accent),var(--accent2));width:36px;height:36px;border-radius:9px;display:grid;place-items:center}
+  .grad{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  nav a.btn{padding:10px 20px;border-radius:10px;font-size:.9rem}
+  .btn{display:inline-block;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;padding:14px 32px;border-radius:12px;font-weight:600;text-decoration:none;transition:.15s;border:none;cursor:pointer;font-size:1rem}
+  .btn:hover{filter:brightness(1.1);transform:translateY(-1px)}
+  .btn.ghost{background:transparent;border:1px solid var(--border);color:var(--muted)}
+  .btn.ghost:hover{border-color:var(--accent);color:var(--text)}
+  section{max-width:1100px;margin:0 auto;padding:80px 24px}
+  .hero{text-align:center;padding:100px 24px 60px}
+  .hero .tag{display:inline-block;font-size:.8rem;padding:6px 14px;border-radius:99px;border:1px solid var(--accent);background:rgba(99,102,241,.15);color:#c7d2fe;margin-bottom:24px}
+  .hero h1{font-size:3.4rem;line-height:1.12;margin-bottom:20px;letter-spacing:-.02em}
+  .hero p{color:var(--muted);font-size:1.15rem;max-width:640px;margin:0 auto 36px;line-height:1.6}
+  .hero .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .demo-mock{
+    max-width:760px;margin:60px auto 0;background:var(--panel);border:1px solid var(--border);
+    border-radius:16px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.4);
+  }
+  .mock-bar{display:flex;gap:6px;padding:12px 16px;border-bottom:1px solid var(--border);background:#0a0e18}
+  .mock-bar i{width:11px;height:11px;border-radius:50%}
+  .mock-body{display:grid;grid-template-columns:1fr 1fr;min-height:220px}
+  .mock-left{padding:20px;border-right:1px solid var(--border)}
+  .mock-right{padding:20px;background:#0a0e18;font-family:Consolas,monospace;font-size:.7rem;line-height:1.7;color:#7dd3fc}
+  .mock-input{background:#0a0e18;border:1px solid var(--border);border-radius:8px;padding:10px;font-size:.78rem;color:var(--muted);margin-bottom:10px}
+  .mock-btn{background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:8px;padding:10px;text-align:center;font-size:.8rem;font-weight:600}
+  h2{font-size:2rem;margin-bottom:14px;text-align:center}
+  .sub{text-align:center;color:var(--muted);max-width:600px;margin:0 auto 50px;line-height:1.6}
+  .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+  .feat{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:28px;transition:.2s}
+  .feat:hover{border-color:var(--accent);transform:translateY(-3px)}
+  .feat .ic{font-size:2rem;margin-bottom:14px}
+  .feat h3{margin-bottom:10px;font-size:1.05rem}
+  .feat p{color:var(--muted);font-size:.88rem;line-height:1.6}
+  .apps{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+  .app{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:20px 16px;text-align:center;font-size:.85rem;transition:.2s}
+  .app:hover{border-color:var(--accent2)}
+  .app .ic{font-size:1.8rem;display:block;margin-bottom:8px}
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;counter-reset:s}
+  .step{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:28px;position:relative}
+  .step::before{
+    counter-increment:s;content:counter(s);
+    position:absolute;top:-16px;left:24px;width:34px;height:34px;border-radius:50%;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    display:grid;place-items:center;font-weight:700;font-size:.9rem;
+  }
+  .step h3{margin:8px 0 8px;font-size:1rem}
+  .step p{color:var(--muted);font-size:.85rem;line-height:1.6}
+  .pricing{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;max-width:760px;margin:0 auto}
+  .plan{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:34px;text-align:center}
+  .plan.pro{border-color:var(--accent);box-shadow:0 0 40px rgba(99,102,241,.2)}
+  .plan .name{font-size:.85rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
+  .plan .price{font-size:2.6rem;font-weight:700;margin-bottom:6px}
+  .plan .price small{font-size:.9rem;color:var(--muted);font-weight:400}
+  .plan ul{list-style:none;margin:24px 0;text-align:left}
+  .plan li{padding:8px 0;font-size:.88rem;color:var(--muted);border-bottom:1px solid var(--border)}
+  .plan li:last-child{border:none}
+  .plan li::before{content:'✓ ';color:#34d399;font-weight:700;margin-right:6px}
+  .cta-final{text-align:center;background:linear-gradient(135deg,rgba(99,102,241,.15),rgba(34,211,238,.1));border:1px solid var(--accent);border-radius:24px;margin:0 auto 80px;max-width:760px;padding:60px 40px}
+  .cta-final h2{margin-bottom:14px}
+  .cta-final p{color:var(--muted);margin-bottom:30px}
+  footer{text-align:center;color:var(--muted);font-size:.8rem;padding:30px;border-top:1px solid var(--border)}
+  @media(max-width:640px){.hero h1{font-size:2.2rem}.mock-body{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo"><div class="badge">⚡</div>AI <span class="grad">App Coder</span></div>
+  <div style="display:flex;gap:12px;align-items:center">
+    <a href="#features" class="btn ghost" style="padding:8px 16px">Features</a>
+    <a href="index.html" class="btn" style="padding:10px 20px;font-size:.9rem">App starten →</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="tag">⚡ v2 · Jetzt mit KI-Modus & 12 App-Vorlagen</div>
+  <h1>Beschreibe deine App.<br><span class="grad">Erhalte sofort lauffähigen Code.</span></h1>
+  <p>Der AI App Coder verwandelt deine Idee in Sekunden in eine komplette Web-App — mit Live-Vorschau, Design-Wahl und One-Click-Export. Komplett im Browser, ohne Server, ohne Installation.</p>
+  <div class="cta-row">
+    <a href="index.html" class="btn">🚀 Jetzt kostenlos ausprobieren</a>
+    <a href="#apps" class="btn ghost">App-Vorlagen ansehen</a>
+  </div>
+
+  <div class="demo-mock">
+    <div class="mock-bar"><i style="background:#f87171"></i><i style="background:#fbbf24"></i><i style="background:#34d399"></i></div>
+    <div class="mock-body">
+      <div class="mock-left">
+        <div class="mock-input">🧠 „Eine To-Do-Liste mit dunklem Design …"</div>
+        <div class="mock-input" style="opacity:.6">📦 App-Typ: Automatisch erkennen</div>
+        <div class="mock-input" style="opacity:.6">🎨 Design: Indigo Nacht · Modern</div>
+        <div class="mock-btn">⚡ App generieren</div>
+      </div>
+      <div class="mock-right">
+&lt;!DOCTYPE html&gt;<br>
+&lt;html lang="de"&gt;<br>
+&nbsp;&nbsp;&lt;h1&gt;✅ Meine Aufgaben&lt;/h1&gt;<br>
+&nbsp;&nbsp;&lt;button&gt;＋ Hinzufügen&lt;/button&gt;<br>
+&nbsp;&nbsp;// localStorage · Filter · Animation<br>
+<span style="color:#34d399">✓ Fertig in 0,9 Sekunden</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <h2>Alles, was du brauchst — <span class="grad">nichts, was du nicht brauchst</span></h2>
+  <p class="sub">Kein Setup, keine Cloud-Zwänge, keine versteckten Kosten. Eine Datei, ein Browser, fertig.</p>
+  <div class="features">
+    <div class="feat"><div class="ic">⚡</div><h3>Sofort-Ergebnis</h3><p>Von der Idee zur laufenden App in unter einer Sekunde — die lokale Engine generiert ohne Wartezeit.</p></div>
+    <div class="feat"><div class="ic">🤖</div><h3>Optionaler KI-Modus</h3><p>Eigener API-Key (OpenAI-kompatibel) für beliebig komplexe App-Ideen. Bei Fehlern greift automatisch der Offline-Fallback.</p></div>
+    <div class="feat"><div class="ic">🎨</div><h3>6 Designs & 4 Schriftarten</h3><p>Dunkel oder hell, Indigo bis Sand — jede generierte App bekommt dein gewähltes Farbschema und Typografie.</p></div>
+    <div class="feat"><div class="ic">🔒</div><h3>100 % privat</h3><p>Deine Ideen und dein API-Key bleiben im Browser. Nichts wird an Server gesendet — Datenschutz von Grund auf.</p></div>
+    <div class="feat"><div class="ic">📄</div><h3>Echter Code</h3><p>Sauberes HTML/CSS/JS mit Syntax-Highlighting — jede App als eigenständige Datei exportierbar, frei verwendbar.</p></div>
+    <div class="feat"><div class="ic">📦</div><h3>12 bewährte Vorlagen</h3><p>Von Produktivität über Spiele bis Wetter-Daten — für jeden Anwendungsfall die passende Basis.</p></div>
+  </div>
+</section>
+
+<section id="apps">
+  <h2>12 App-Vorlagen <span class="grad">aus einer Idee</span></h2>
+  <p class="sub">Beschreibe dein Vorhaben oder wähle direkt — die Engine erkennt, was du brauchst.</p>
+  <div class="apps">
+    <div class="app"><span class="ic">✅</span>To-Do-Liste</div>
+    <div class="app"><span class="ic">📝</span>Notizen</div>
+    <div class="app"><span class="ic">💰</span>Ausgaben-Tracker</div>
+    <div class="app"><span class="ic">📊</span>Habit-Tracker</div>
+    <div class="app"><span class="ic">🧮</span>Taschenrechner</div>
+    <div class="app"><span class="ic">📐</span>Einheitenumrechner</div>
+    <div class="app"><span class="ic">🔐</span>Passwort-Generator</div>
+    <div class="app"><span class="ic">🍅</span>Pomodoro-Timer</div>
+    <div class="app"><span class="ic">🧠</span>Quiz</div>
+    <div class="app"><span class="ic">🧩</span>Memory-Spiel</div>
+    <div class="app"><span class="ic">🌤</span>Wetter-Dashboard</div>
+    <div class="app"><span class="ic">✨</span>Landingpage</div>
+  </div>
+</section>
+
+<section>
+  <h2>In 3 Schritten <span class="grad">zur eigenen App</span></h2>
+  <p class="sub">Ohne Programmierkenntnisse. Ohne Account. Ohne Wartezeit.</p>
+  <div class="steps">
+    <div class="step"><h3>Beschreiben</h3><p>Schreibe in einem Satz, was deine App können soll — oder wähle aus 12 Vorlagen.</p></div>
+    <div class="step"><h3>Generieren</h3><p>Die Engine erstellt sofort lauffähigen Code in deinem Design. KI-Modus optional dazuschaltbar.</p></div>
+    <div class="step"><h3>Nutzen & Teilen</h3><p>Live-Vorschau testen, Code ansehen, als HTML-Datei exportieren — und überall einsetzen.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Preise</h2>
+  <p class="sub">Die Offline-Engine ist komplett kostenlos. Der KI-Modus nutzt deinen eigenen API-Key.</p>
+  <div class="pricing">
+    <div class="plan">
+      <div class="name">Offline</div>
+      <div class="price">0 €<small> / für immer</small></div>
+      <ul>
+        <li>12 App-Vorlagen</li>
+        <li>6 Farbschemata & 4 Schriftarten</li>
+        <li>Live-Vorschau & Code-Export</li>
+        <li>Läuft komplett im Browser</li>
+        <li>Unbegrenzte Generierungen</li>
+      </ul>
+      <a href="index.html" class="btn ghost" style="width:100%">Jetzt starten</a>
+    </div>
+    <div class="plan pro">
+      <div class="name">KI-Modus</div>
+      <div class="price">Eigener Key<small> · nutzungsbasiert</small></div>
+      <ul>
+        <li>Beliebige App-Ideen in Freitext</li>
+        <li>OpenAI-kompatible APIs</li>
+        <li>Automatischer Offline-Fallback</li>
+        <li>Alle Offline-Features inklusive</li>
+        <li>Key bleibt lokal in deinem Browser</li>
+      </ul>
+      <a href="index.html" class="btn" style="width:100%">KI-Modus öffnen</a>
+    </div>
+  </div>
+</section>
+
+<div class="cta-final">
+  <h2>Bereit für deine erste App?</h2>
+  <p>Starte jetzt — keine Anmeldung, keine Installation, keine Kosten.</p>
+  <a href="index.html" class="btn">⚡ AI App Coder starten</a>
+</div>
+
+<footer>© 2026 AI App Coder · Generierter Code ist frei verwendbar · Gebaut mit ❤️</footer>
+
+</body>
+</html>

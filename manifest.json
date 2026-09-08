@@ -1,0 +1,65 @@
+{
+  "name": "AI App Coder",
+  "short_name": "App Coder",
+  "description": "Beschreibe deine App. Erhalte sofort lauffähigen Code — 12 Vorlagen, Design-Wahl, optionaler KI-Modus. 100 % im Browser.",
+  "id": "./",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0b0f1a",
+  "theme_color": "#6366f1",
+  "lang": "de",
+  "categories": ["productivity", "developer", "utilities"],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshots/screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "AI App Coder auf dem Desktop: Idee beschreiben, Code erhalten"
+    },
+    {
+      "src": "screenshots/screenshot-mobile.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "AI App Coder mobil: 12 App-Vorlagen mit Live-Vorschau"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Neue App generieren",
+      "short_name": "Generieren",
+      "description": "Direkt zur App-Generierung",
+      "url": "./index.html",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

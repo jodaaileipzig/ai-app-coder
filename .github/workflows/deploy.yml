@@ -1,0 +1,51 @@
+# ============================================================
+# AI App Coder — Automatisches Deployment auf GitHub Pages
+# Läuft bei jedem Push auf main (oder manuell via "Run workflow")
+# ============================================================
+name: 🚀 Deploy AI App Coder to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:   # manueller Start über den Actions-Tab
+
+# Rechte für GitHub Pages Deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Nur ein Deployment gleichzeitig; laufendes wird NICHT abgebrochen
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Code auschecken
+        uses: actions/checkout@v4
+
+      - name: 🧹 Nur App-Dateien bereitstellen
+        run: |
+          mkdir -p _site
+          cp index.html landing.html manifest.json sw.js _site/
+          cp -r icons screenshots _site/
+          # Übersicht, was deployed wird
+          find _site -type f | sort
+
+      - name: ⚙️ GitHub Pages konfigurieren
+        uses: actions/configure-pages@v5
+
+      - name: 📦 Artifact hochladen
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: 🌐 Auf GitHub Pages deployen
+        id: deployment
+        uses: actions/deploy-pages@v4
